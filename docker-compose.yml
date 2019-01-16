@@ -23,6 +23,8 @@ services:
       POSTGRES_PASSWORD: 
 
   kong:
+    extra_hosts:
+      - "keycloak-host:CHANGE-ME"
     image: kong:0.14-centos-oidc
     depends_on:
       - kong-db
@@ -49,7 +51,7 @@ services:
   keycloak-db:
     image: postgres:9.6
     volumes: 
-      - keycloak-datastore:/var/lib/postresql/data
+      - keycloak-datastore:/var/lib/postgresql/data
     networks:
       - keycloak-net
     ports:
